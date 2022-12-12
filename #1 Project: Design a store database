@@ -1,0 +1,24 @@
+Create your own store! Your store should sell one type of things, like clothing or bikes, whatever you want your store to specialize in. 
+You should have a table for all the items in your store, and at least 5 columns for the kind of data you think you'd need to store. 
+You should sell at least 15 items, and use select statements to order your items by price and show at least one statistic about the items.
+
+
+
+CREATE TABLE puppy_adoption (id INTEGER PRIMARY KEY, breed TEXT, quantity INTEGER, adoption_fee INTEGER);
+
+INSERT INTO puppy_adoption VALUES (1, "labrador", 3, 85);
+INSERT INTO puppy_adoption VALUES (2, "poodle", 2, 125);
+INSERT INTO puppy_adoption VALUES (3, "german_shephard", 3, 225);
+INSERT INTO puppy_adoption VALUES (4, "cocker_spaniel", 4, 200);
+INSERT INTO puppy_adoption VALUES (5, "dachshund", 5, 200);
+INSERT INTO puppy_adoption VALUES (6, "husky", 2, 90);
+INSERT INTO puppy_adoption VALUES (7, "bichon_frise", 3, 325);
+INSERT INTO puppy_adoption VALUES (8, "welsh_corgi", 4, 350);
+INSERT INTO puppy_adoption VALUES (9, "maltipoo", 2, 175);
+INSERT INTO puppy_adoption VALUES (10, "schnauzer", 5, 275);
+
+SELECT * FROM puppy_adoption ORDER BY breed;
+
+SELECT SUM(quantity) FROM puppy_adoption;
+
+
