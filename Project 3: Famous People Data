@@ -1,0 +1,57 @@
+CREATE TABLE Authors(id INTEGER PRIMARY KEY, 
+first_name TEXT,
+last_name TEXT,
+birthdate TEXT,
+website TEXT);
+
+INSERT INTO Authors(first_name,last_name,birthdate,website) VALUES("Sarah J", "Maas", "03-05-1986", "sarahjmaas.com");
+INSERT INTO Authors(first_name,last_name,birthdate,website) VALUES("Kiera", "Cass", "05-19-1981", "kieracass.com");
+INSERT INTO Authors(first_name,last_name,birthdate,website) VALUES("Victoria", "Aveyard", "07-27-1990", "victoriaaveyard.com");
+INSERT INTO Authors(first_name,last_name,birthdate,website) VALUES("Mary", "Pearson", "08-14-1955", "marypearson.com");
+
+CREATE TABLE Books(id INTEGER PRIMARY KEY,
+author_id INTEGER,
+series_name TEXT,
+title TEXT,
+pub_date TEXT,
+genre TEXT);
+
+INSERT INTO Books(author_id,series_name,title,pub_date,genre) VALUES(1, "Throne of Glass Novel", "Throne Of Glass", "08-02-2012", "fantasy fiction");
+INSERT INTO Books(author_id,series_name,title,pub_date,genre) VALUES(2, 'The Selection Series', 'The Selection', '04-14-2012', 'young adult');
+INSERT INTO Books(author_id,series_name,title,pub_date,genre) VALUES(3, 'Red Queen Series', 'Red Queen', '02-10-2015', 'high fantasy');
+INSERT INTO Books(author_id,series_name,title,pub_date,genre) VALUES(4, 'The Remnant Chronicles', 'Kiss Of Deception', '07-08-2014', 'fantasy fiction');
+
+CREATE TABLE Sequels(id INTEGER PRIMARY KEY,
+author_id_b INTEGER,
+title_b TEXT,
+series_total INTEGER);
+
+INSERT INTO Sequels(author_id_b,title_b,series_total) VALUES(1, 'Crown of Midnight', 8);
+INSERT INTO Sequels(author_id_b,title_b,series_total) VALUES(2, 'The Elite', 5);
+INSERT INTO Sequels(author_id_b,title_b,series_total) VALUES(3, 'Glass Sword', 6);
+INSERT INTO Sequels(author_id_b,title_b,series_total) VALUES(4, 'The Heart of Betrayal', 4);
+
+CREATE TABLE Info(id INTEGER PRIMARY KEY,
+total_pages INTEGER,
+ISBN TEXT,
+map TEXT,
+cinema TEXT,
+publisher TEXT,
+grade_level TEXT,
+reading_level TEXT);
+
+INSERT INTO Info(total_pages,ISBN,map,cinema,publisher,grade_level,reading_level) VALUES(416, 9781599906959, 'yes', 'in progress', 'Bloomsbury YA', '9-12', '14-17');
+INSERT INTO Info(total_pages,ISBN,map,cinema,publisher,grade_level,reading_level) VALUES(352, 9780062059949, 'yes', 'Netflix movie', 'HarperTeen', '8-9', '13-18');
+INSERT INTO Info(total_pages,ISBN,map,cinema,publisher,grade_level,reading_level) VALUES(416, 9780062310644, 'yes', 'Peacock tv', 'HarperTeen', '8-9', '13-17');
+INSERT INTO Info(total_pages,ISBN,map,cinema,publisher,grade_level,reading_level) VALUES(496, 9780805099232, 'yes', 'no', 'Henry Holt and Co.', '9-12', '14-18');
+
+
+SELECT a.first_name,last_name,b.author_id FROM Authors a JOIN Books b ON a.id=b.author_id;
+
+SELECT a.first_name,last_name,b.title FROM Authors a JOIN Books b ON a.id=b.author_id;
+
+SELECT a.first_name,last_name,b.series_name,s.series_total FROM Authors a JOIN Books b ON a.id=b.author_id JOIN Sequels s ON a.id=s.id;
+
+SELECT b.author_id,a.website,s.title_b AS 'Next in Series' FROM Books b JOIN Authors a ON b.id=a.id JOIN Sequels s ON b.id=s.id;
+
+SELECT b.author_id AS 'Book ID',a.last_name,b.title,i.total_pages,ISBN,map,cinema,publisher FROM Books b JOIN Authors a ON b.id=a.id JOIN Info I ON b.id=i.id;
